@@ -13,10 +13,9 @@ import ProductEight from "../../assets/productEight.jpg";
 import ProductFifteen from "../../assets/productFifteen.jpg";
 import DefaultSorting from "../layouts/DefaultSorting";
 import ShopProducts from "../ShopProducts";
-import { Link } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { IoFilter } from "react-icons/io5";
-import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import Heading from "../Heading";
 import { ToastContainer } from "react-toastify";
 
@@ -33,22 +32,11 @@ const Shop = () => {
     return () => (document.body.style.overflow = "auto");
   }, [isFilters]);
 
-  // ----------------------##-----------------------
-  // Category state
+  // Expand/collapse state
   const [isCategoryExpand, setCategoryExpand] = useState(true);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-
-  // Color state
   const [isColorExpand, setColorExpand] = useState(true);
-  const [selectedColor, setSelectedColor] = useState(null);
-
-  // Brand state
   const [isBrandExpand, setBrandExpand] = useState(true);
-  const [selectedBrands, setSelectedBrands] = useState([]);
-
-  // Size state
   const [isSizeExpand, setSizeExpand] = useState(true);
-  const [selectedSizes, setSelectedSizes] = useState([]);
 
   // Category data
   const categories = [
@@ -75,22 +63,22 @@ const Shop = () => {
 
   // Color data
   const colors = [
-    { name: "navy", bgColor: "bg-blue-900", value: "#1e3a8a" },
-    { name: "yellow", bgColor: "bg-yellow-500", value: "#eab308" },
-    { name: "black", bgColor: "bg-black", value: "#000000" },
-    { name: "lightblue", bgColor: "bg-blue-200", value: "#bfdbfe" },
-    { name: "brown", bgColor: "bg-amber-700", value: "#b45309" },
-    { name: "orange", bgColor: "bg-orange-500", value: "#f97316" },
-    { name: "pink", bgColor: "bg-pink-300", value: "#f9a8d4" },
-    { name: "coral", bgColor: "bg-red-400", value: "#f87171" },
-    { name: "gray", bgColor: "bg-gray-400", value: "#9ca3af" },
-    { name: "mint", bgColor: "bg-green-200", value: "#bbf7d0" },
+    { name: "navy", bgColor: "bg-blue-900" },
+    { name: "yellow", bgColor: "bg-yellow-500" },
+    { name: "black", bgColor: "bg-black" },
+    { name: "lightblue", bgColor: "bg-blue-200" },
+    { name: "brown", bgColor: "bg-amber-700" },
+    { name: "orange", bgColor: "bg-orange-500" },
+    { name: "pink", bgColor: "bg-pink-300" },
+    { name: "coral", bgColor: "bg-red-400" },
+    { name: "gray", bgColor: "bg-gray-400" },
+    { name: "mint", bgColor: "bg-green-200" },
   ];
 
   // Size options
   const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
-  // Product data with filter properties
+  // Product data
   const products = [
     {
       id: 1,
@@ -101,10 +89,7 @@ const Shop = () => {
       price: 29.0,
       productColor: "Gray",
       badgeClassName: "bg-white",
-      category: "Jackets",
-      brand: "Zara",
       size: "M",
-      color: "black",
     },
     {
       id: 2,
@@ -115,10 +100,7 @@ const Shop = () => {
       price: 62.0,
       productColor: "White",
       badgeClassName: "bg-green-300",
-      category: "Shorts",
-      brand: "Nike",
       size: "S",
-      color: "white",
     },
     {
       id: 3,
@@ -129,10 +111,7 @@ const Shop = () => {
       price: 17.0,
       productColor: "Black",
       badgeClassName: "bg-white",
-      category: "T-Shirts & Tops",
-      brand: "Adidas",
       size: "L",
-      color: "black",
     },
     {
       id: 4,
@@ -143,10 +122,7 @@ const Shop = () => {
       price: 99.0,
       productColor: "White",
       badgeClassName: "bg-green-300",
-      category: "Jumpers & Cardigans",
-      brand: "Chanel",
       size: "XL",
-      color: "white",
     },
     {
       id: 5,
@@ -157,10 +133,7 @@ const Shop = () => {
       price: 29.0,
       productColor: "Black",
       badgeClassName: "bg-white",
-      category: "Jackets",
-      brand: "Puma",
       size: "M",
-      color: "black",
     },
     {
       id: 6,
@@ -171,10 +144,7 @@ const Shop = () => {
       price: 52.0,
       productColor: "White",
       badgeClassName: "bg-green-300",
-      category: "T-Shirts & Tops",
-      brand: "Zara",
       size: "S",
-      color: "white",
     },
     {
       id: 7,
@@ -185,10 +155,7 @@ const Shop = () => {
       price: 17.0,
       productColor: "White",
       badgeClassName: "bg-white",
-      category: "T-Shirts & Tops",
-      brand: "Nike",
       size: "M",
-      color: "white",
     },
     {
       id: 8,
@@ -199,10 +166,7 @@ const Shop = () => {
       price: 49.0,
       productColor: "Black",
       badgeClassName: "bg-green-300",
-      category: "Dresses",
-      brand: "Chanel",
       size: "L",
-      color: "black",
     },
     {
       id: 9,
@@ -213,74 +177,9 @@ const Shop = () => {
       price: 44.0,
       productColor: "Black",
       badgeClassName: "bg-green-300",
-      category: "T-Shirts & Tops",
-      brand: "Adidas",
       size: "XL",
-      color: "black",
     },
   ];
-
-  // Toggle handlers
-  const toggleCategory = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-  };
-
-  const toggleBrand = (brand) => {
-    setSelectedBrands((prev) =>
-      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
-    );
-  };
-
-  const toggleSize = (size) => {
-    setSelectedSizes((prev) =>
-      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
-    );
-  };
-
-  const clearAllFilters = () => {
-    setSelectedCategories([]);
-    setSelectedColor(null);
-    setSelectedBrands([]);
-    setSelectedSizes([]);
-  };
-
-  // Filter products based on selected filters
-  const filteredProducts = products.filter((product) => {
-    // Category filter
-    if (
-      selectedCategories.length > 0 &&
-      !selectedCategories.includes(product.category)
-    ) {
-      return false;
-    }
-
-    // Color filter
-    if (selectedColor && product.color !== selectedColor) {
-      return false;
-    }
-
-    // Brand filter
-    if (selectedBrands.length > 0 && !selectedBrands.includes(product.brand)) {
-      return false;
-    }
-
-    // Size filter
-    if (selectedSizes.length > 0 && !selectedSizes.includes(product.size)) {
-      return false;
-    }
-
-    return true;
-  });
-
-  const activeFiltersCount =
-    selectedCategories.length +
-    (selectedColor ? 1 : 0) +
-    selectedBrands.length +
-    selectedSizes.length;
 
   return (
     <>
@@ -304,17 +203,6 @@ const Shop = () => {
           <h3 className="text-2xl lg:text-7xl font-bold text-center text-mainColor">
             THE SHOP
           </h3>
-          {/* <ul className="flex justify-center gap-x-5 lg:gap-x-15 text-center py-3 space-y-2 flex-wrap ">
-            {["MAN", "WOMEN", "JACKETS", "HOODIES", "TROUSERS", "SHOES"].map(
-              (item, idx) => (
-                <Link to={item === "SHOP" ? "/shop" : "/"} key={idx}>
-                  <li className="relative list-none w-[15%] px-2 py-2 text-sm font-medium text-black group cursor-pointer">
-                    {item}
-                  </li>
-                </Link>
-              )
-            )}
-          </ul> */}
         </Container>
       </div>
       {/* Shop Banner Part End */}
@@ -323,240 +211,204 @@ const Shop = () => {
       <div className="relative py-[30px]">
         <Container>
           <Flex className="justify-between gap-x-5">
-            {/* Sidebar (Categories + Filters) */}
+            {/* ===================== SIDEBAR START ===================== */}
             <div
-              className={`w-[85%] fixed top-0 left-0 h-screen p-5 bg-white shadow-2xl rounded transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto
-  ${isFilters ? "translate-x-0" : "-translate-x-full"}
-  lg:static lg:w-[28%] lg:translate-x-0 lg:h-full lg:overflow-visible`}
+              className={`w-[85%] fixed top-0 left-0 h-screen px-5 pt-5 pb-20  bg-white shadow-2xl  rounded-lg transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto
+                ${isFilters ? "translate-x-0" : "-translate-x-full"}
+                lg:static lg:w-[25%] lg:translate-x-0 lg:h-full lg:overflow-visible`}
             >
-              {/* Close Button for Mobile */}
-              <div className="flex justify-between items-center lg:hidden mb-6 pb-4 border-b-2 border-gray-100">
-                <div>
-                  <h5 className="text-xl font-bold text-gray-900">FILTERS</h5>
-                  {activeFiltersCount > 0 && (
-                    <span className="text-xs text-gray-500 mt-1 inline-block">
-                      {activeFiltersCount} active filter
-                      {activeFiltersCount > 1 ? "s" : ""}
-                    </span>
-                  )}
-                </div>
+              {/* Mobile Close Button */}
+              <div className="flex items-center justify-between lg:hidden mb-5 pb-5 border-b border-gray-100">
+                <h5 className="text-2xl font-semibold tracking-widest uppercase text-gray-800 m-0">
+                  Filters
+                </h5>
+
                 <button
                   onClick={() => setIsFilters(false)}
-                  className="text-xl font-bold text-gray-700 hover:text-black transition-colors  hover:bg-gray-100 rounded-lg"
+                  className="flex items-center justify-center w-9 h-9 border-black border-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors -mt-2"
                 >
-                  <GrClose />
+                  <GrClose className="text-xl block leading-none" />
                 </button>
               </div>
 
-              {/* Clear All Button */}
-              {activeFiltersCount > 0 && (
+              {/* -------- CATEGORY -------- */}
+              <div className="mb-5">
                 <button
-                  onClick={clearAllFilters}
-                  className="w-full mb-5 py-3 px-4 bg-gradient-to-r from-red-50 to-pink-50 text-red-600 rounded-xl hover:from-red-100 hover:to-pink-100 transition-all font-semibold shadow-sm border border-red-200"
+                  onClick={() => setCategoryExpand(!isCategoryExpand)}
+                  className="w-full flex justify-between items-center mb-3 py-3 px-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all border border-gray-200"
                 >
-                  Clear All Filters ({activeFiltersCount})
+                  <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-widest">
+                    Product Categories
+                  </h4>
+                  <IoIosArrowDown
+                    className={`text-base text-gray-500 transition-transform duration-300 ${
+                      isCategoryExpand ? "" : "rotate-180"
+                    }`}
+                  />
                 </button>
-              )}
 
-              {/* Active Filters Info */}
-              {activeFiltersCount > 0 && (
-                <div className="mb-3 p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-800 font-medium">
-                    Showing {filteredProducts.length} of {products.length}{" "}
-                    products
-                  </p>
-                </div>
-              )}
-
-              {/* Short List part start  */}
-              <div className="w-full">
-                {/* ------------------------- CATEGORY Start ------------------------- */}
-                <div className="mb-5">
-                  <button
-                    onClick={() => setCategoryExpand(!isCategoryExpand)}
-                    className="w-full flex justify-between items-center mb-4 py-3 px-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:from-gray-100 hover:to-gray-200 transition-all"
-                  >
-                    <h4 className="text-md font-bold text-gray-900 uppercase tracking-wide">
-                      Product Categories
-                    </h4>
-                    <IoIosArrowUp
-                      className={`text-xl text-gray-700 transition-transform duration-300 ${
-                        isCategoryExpand ? "" : "rotate-180"
-                      }`}
-                    />
-                  </button>
-
-                  {isCategoryExpand && (
-                    <ul className="space-y-1 mb-3">
-                      {categories.map((item) => (
-                        <li
-                          key={item}
-                          onClick={() => toggleCategory(item)}
-                          className={`text-sm py-3 px-4 rounded-xl cursor-pointer transition-all duration-200 ${
-                            selectedCategories.includes(item)
-                              ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold shadow-md transform scale-[1.02]"
-                              : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 font-medium"
-                          }`}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                {/* ------------------------- CATEGORY End ------------------------- */}
-
-                {/* ------------------------- BRAND Start ------------------------- */}
-                <div className="mb-6">
-                  <button
-                    onClick={() => setBrandExpand(!isBrandExpand)}
-                    className="w-full flex justify-between items-center py-3 px-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:from-gray-100 hover:to-gray-200 transition-all"
-                  >
-                    <Heading
-                      className="text-md font-bold text-gray-900 tracking-wide uppercase"
-                      txt="Brand"
-                      as="h3"
-                    />
-                    <IoIosArrowUp
-                      className={`text-xl text-gray-700 transition-transform duration-300 ${
-                        isBrandExpand ? "" : "rotate-180"
-                      }`}
-                    />
-                  </button>
-
-                  {isBrandExpand && (
-                    <div className="mt-4 space-y-2">
-                      {brands.map((brand) => (
-                        <label
-                          key={brand.name}
-                          className={`flex items-center justify-between py-3 px-4 rounded-xl cursor-pointer transition-all duration-200 ${
-                            selectedBrands.includes(brand.name)
-                              ? "bg-gradient-to-r from-blue-50 to-purple-50 shadow-sm"
-                              : "hover:bg-gray-50"
-                          }`}
-                        >
-                          <div className="flex items-center space-x-3">
-                            <input
-                              type="checkbox"
-                              checked={selectedBrands.includes(brand.name)}
-                              onChange={() => toggleBrand(brand.name)}
-                              className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
-                            />
-                            <span
-                              className={`${
-                                selectedBrands.includes(brand.name)
-                                  ? "text-gray-900 font-semibold"
-                                  : "text-gray-700 font-medium"
-                              }`}
-                            >
-                              {brand.name}
-                            </span>
-                          </div>
-                          <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">
-                            {brand.count}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                {/* ------------------------- BRAND End ------------------------- */}
-
-                {/* ------------------------- COLOR Start ------------------------- */}
-                <div className="mb-6 bg-white rounded-xl">
-                  <button
-                    onClick={() => setColorExpand(!isColorExpand)}
-                    className="w-full flex items-center justify-between py-3 px-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:from-gray-100 hover:to-gray-200 transition-all"
-                  >
-                    <h3 className="text-md font-bold text-gray-900 uppercase tracking-wide">
-                      Color
-                    </h3>
-                    <IoIosArrowUp
-                      className={`text-xl text-gray-700 transition-transform duration-300 ${
-                        isColorExpand ? "" : "rotate-180"
-                      }`}
-                    />
-                  </button>
-
-                  {isColorExpand && (
-                    <div className="pb-6 mt-4 px-2">
-                      <div className="grid grid-cols-5 gap-3">
-                        {colors.map((color) => (
-                          <button
-                            key={color.name}
-                            className={`w-11 h-11 rounded-full transition-all duration-200 transform ${
-                              selectedColor === color.name
-                                ? "ring-4 ring-offset-2 ring-blue-500 scale-110 shadow-lg"
-                                : "ring-2 ring-gray-300 hover:ring-gray-400 hover:scale-105 shadow-sm"
-                            } ${color.bgColor}`}
-                            onClick={() =>
-                              setSelectedColor(
-                                selectedColor === color.name ? null : color.name
-                              )
-                            }
-                            aria-label={`Select ${color.name} color`}
-                            title={
-                              color.name.charAt(0).toUpperCase() +
-                              color.name.slice(1)
-                            }
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {/* ------------------------- COLOR End ------------------------- */}
-
-                {/* ------------------------- SIZE Start ------------------------- */}
-                <div className="mb-6">
-                  <button
-                    onClick={() => setSizeExpand(!isSizeExpand)}
-                    className="w-full flex justify-between items-center mb-4 py-3 px-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:from-gray-100 hover:to-gray-200 transition-all"
-                  >
-                    <h4 className="text-md font-bold text-gray-900 uppercase tracking-wide">
-                      Size
-                    </h4>
-                    <IoIosArrowUp
-                      className={`text-xl text-gray-700 transition-transform duration-300 ${
-                        isSizeExpand ? "" : "rotate-180"
-                      }`}
-                    />
-                  </button>
-
-                  {isSizeExpand && (
-                    <ul className="grid grid-cols-3 gap-3">
-                      {sizes.map((size) => (
-                        <li
-                          key={size}
-                          onClick={() => toggleSize(size)}
-                          className={`py-3 text-center font-bold rounded-xl cursor-pointer transition-all duration-200 transform ${
-                            selectedSizes.includes(size)
-                              ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg scale-105"
-                              : "bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400 hover:shadow-md hover:scale-[1.02]"
-                          }`}
-                        >
-                          {size}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                {/* ------------------------- SIZE End ------------------------- */}
+                {isCategoryExpand && (
+                  <ul className="space-y-0.5">
+                    {categories.map((item) => (
+                      <li
+                        key={item}
+                        className="text-sm py-2.5 px-4 rounded-xl cursor-pointer text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-medium transition-all duration-150 border border-transparent hover:border-gray-200"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-              {/* Short List part End  */}
-            </div>
-            {/* Sidebar End */}
 
-            {/* Overlay (Mobile Only) */}
+              <hr className="border-gray-100 mb-5" />
+
+              {/* -------- BRAND -------- */}
+              <div className="mb-5">
+                <button
+                  onClick={() => setBrandExpand(!isBrandExpand)}
+                  className="w-full flex justify-between items-center mb-3 py-3 px-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all border border-gray-200"
+                >
+                  <Heading
+                    className="text-xs font-semibold text-gray-700 uppercase tracking-widest"
+                    txt="Brand"
+                    as="h3"
+                  />
+                  <IoIosArrowDown
+                    className={`text-base text-gray-500 transition-transform duration-300 ${
+                      isBrandExpand ? "" : "rotate-180"
+                    }`}
+                  />
+                </button>
+
+                {isBrandExpand && (
+                  <div className="space-y-0.5">
+                    {brands.map((brand) => (
+                      <label
+                        key={brand.name}
+                        className="flex items-center justify-between py-2.5 px-4 rounded-xl cursor-pointer hover:bg-gray-50 transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-blue-600 cursor-pointer"
+                          />
+                          <span className="text-sm text-gray-600 font-medium">
+                            {brand.name}
+                          </span>
+                        </div>
+                        <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full border border-gray-200">
+                          {brand.count}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <hr className="border-gray-100 mb-5" />
+
+              {/* -------- COLOR -------- */}
+              <div className="mb-5">
+                <button
+                  onClick={() => setColorExpand(!isColorExpand)}
+                  className="w-full flex items-center justify-between mb-3 py-3 px-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all border border-gray-200"
+                >
+                  <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-widest">
+                    Color
+                  </h3>
+                  <IoIosArrowDown
+                    className={`text-base text-gray-500 transition-transform duration-300 ${
+                      isColorExpand ? "" : "rotate-180"
+                    }`}
+                  />
+                </button>
+
+                {isColorExpand && (
+                  <div className="grid grid-cols-5 gap-3 px-3 pb-2">
+                    {colors.map((color) => (
+                      <button
+                        key={color.name}
+                        className={`w-9 h-9 rounded-full ring-2 ring-gray-300 hover:ring-gray-400 hover:scale-105 shadow-sm transition-all duration-150 ${color.bgColor}`}
+                        aria-label={`Select ${color.name} color`}
+                        title={
+                          color.name.charAt(0).toUpperCase() +
+                          color.name.slice(1)
+                        }
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <hr className="border-gray-100 mb-5" />
+
+              {/* -------- SIZE -------- */}
+              <div className="mb-2">
+                <button
+                  onClick={() => setSizeExpand(!isSizeExpand)}
+                  className="w-full flex justify-between items-center mb-3 py-3 px-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all border border-gray-200"
+                >
+                  <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-widest">
+                    Size
+                  </h4>
+                  <IoIosArrowDown
+                    className={`text-base text-gray-500 transition-transform duration-300 ${
+                      isSizeExpand ? "" : "rotate-180"
+                    }`}
+                  />
+                </button>
+
+                {isSizeExpand && (
+                  <ul className="grid grid-cols-3 gap-2.5 px-1">
+                    {sizes.map((size) => (
+                      <li
+                        key={size}
+                        className="py-2.5 text-center text-sm font-semibold rounded-xl cursor-pointer border border-gray-200 text-gray-600 hover:border-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all duration-150"
+                      >
+                        {size}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              {/* -------- Price Range -------- */}
+              <div className="mb-3 mt-8">
+                <p className="font-semibold mb-3">Price Range</p>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    className="w-full border px-3 py-2 rounded text-sm outline-none focus:border-black"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    className="w-full border px-3 py-2 rounded text-sm outline-none focus:border-black"
+                  />
+                </div>
+              </div>
+
+              {/* Filter Apply button */}
+              <div className="">
+                <button className="mt-4 w-full bg-black text-white py-3 rounded font-medium hover:bg-gray-900 transition">
+                  Apply Filter
+                </button>
+              </div>
+            </div>
+            {/* ===================== SIDEBAR END ===================== */}
+
+            {/* Mobile Overlay */}
             {isFilters && (
               <div
-                className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden backdrop-blur-sm"
+                className="fixed inset-0 bg-black bg-opacity-40 z-40 lg:hidden backdrop-blur-sm"
                 onClick={() => setIsFilters(false)}
-              ></div>
+              />
             )}
 
-            {/*------------------ Products Section start -------------------- */}
-            <div className="w-full lg:w-[70%] m-auto lg:m-0 pt-5 ">
+            {/* ===================== PRODUCTS SECTION START ===================== */}
+            <div className="w-full lg:w-[75%] m-auto lg:m-0 pt-5">
               <Flex className="justify-between items-center">
                 {/* Filter Button (Mobile Only) */}
                 <div
@@ -564,62 +416,40 @@ const Shop = () => {
                   onClick={() => setIsFilters(true)}
                 >
                   <IoFilter className="text-black text-2xl" />
-                  <h6 className="text-lg font-semibold text-black text-center">
+                  <h6 className="text-base font-medium text-black text-center">
                     FILTERS
                   </h6>
-                  {activeFiltersCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md">
-                      {activeFiltersCount}
-                    </span>
-                  )}
                 </div>
 
-                {/* Breadcrumb start */}
+                {/* Breadcrumb (Desktop Only) */}
                 <h6 className="hidden lg:block text-sm font-medium text-mainColor ml-2">
                   HOME / SHOP
                 </h6>
-                {/* Breadcrumb End */}
 
-                {/* Sorting + View (Desktop Only) */}
-                <div className="flex justify-between items-center items gap-x-5">
+                {/* Sorting + View */}
+                <div className="flex justify-between items-center gap-x-5">
                   <DefaultSorting />
-                  {/* Product Views Sixe start  */}
-                  <div className="hidden lg:flex ">
+                  <div className="hidden lg:flex">
                     <h5 className="text-sm mr-5 text-menuColor">View</h5>
                     <ul className="flex gap-x-3">
-                      <li className="text-sm font-semibold uppercase text-mainColor relative list-none cursor-pointer px-1 group hover:text-black transition-all ease-in-out">
-                        2
-                        <span className="absolute left-0 bottom-0 h-0.5 bg-black transform w-0 group-hover:w-full transition-all duration-300"></span>
-                      </li>
-                      <li className="text-sm font-semibold uppercase text-mainColor relative list-none cursor-pointer px-1 group hover:text-black transition-all ease-in-out">
-                        3
-                        <span className="absolute left-0 bottom-0 h-0.5 bg-black transform w-0 group-hover:w-full transition-all duration-300"></span>
-                      </li>
-                      <li className="text-sm font-semibold uppercase text-mainColor relative list-none cursor-pointer px-1 group hover:text-black transition-all ease-in-out">
-                        4
-                        <span className="absolute left-0 bottom-0 h-0.5 bg-black transform w-0 group-hover:w-full transition-all duration-300"></span>
-                      </li>
+                      {[2, 3, 4].map((num) => (
+                        <li
+                          key={num}
+                          className="text-sm font-semibold uppercase text-mainColor relative list-none cursor-pointer px-1 group hover:text-black transition-all ease-in-out"
+                        >
+                          {num}
+                          <span className="absolute left-0 bottom-0 h-0.5 bg-black transform w-0 group-hover:w-full transition-all duration-300" />
+                        </li>
+                      ))}
                     </ul>
                   </div>
-                  {/* Product Views Sixe End  */}
                 </div>
               </Flex>
 
-              {/* Products Count */}
-              <div className="mt-4 mb-2 ml-3">
-                <p className="text-gray-600 font-medium">
-                  {filteredProducts.length} products found
-                  {activeFiltersCount > 0 &&
-                    ` (${activeFiltersCount} filter${
-                      activeFiltersCount > 1 ? "s" : ""
-                    } applied)`}
-                </p>
-              </div>
-
               {/* Products Grid */}
-              <div className="mt-5">
+              <div className="mt-8">
                 <Flex className="justify-between flex-wrap gap-y-10">
-                  {filteredProducts.map((product) => (
+                  {products.map((product) => (
                     <ShopProducts
                       key={product.id}
                       imgSrcFirst={product.imgSrcFirst}
@@ -632,20 +462,6 @@ const Shop = () => {
                       size={product.size}
                     />
                   ))}
-
-                  {filteredProducts.length === 0 && (
-                    <div className="w-full text-center py-20">
-                      <p className="text-xl text-gray-500 font-medium">
-                        No products found matching your filters
-                      </p>
-                      <button
-                        onClick={clearAllFilters}
-                        className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                      >
-                        Clear All Filters
-                      </button>
-                    </div>
-                  )}
                 </Flex>
               </div>
 
@@ -658,13 +474,13 @@ const Shop = () => {
                       className="relative list-none px-2 py-2 text-lg text-black font-medium cursor-pointer group hover:text-black transition-all ease-in-out"
                     >
                       {num}
-                      <span className="absolute left-0 bottom-0 h-0.5 bg-black transform w-0 group-hover:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 bottom-0 h-0.5 bg-black transform w-0 group-hover:w-full transition-all duration-300" />
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            {/*------------------ Products Section End -------------------- */}
+            {/* ===================== PRODUCTS SECTION END ===================== */}
           </Flex>
         </Container>
       </div>

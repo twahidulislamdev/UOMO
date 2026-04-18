@@ -72,7 +72,7 @@ const Header = () => {
   return (
     <>
       {/* Desktop Header start */}
-      <div className="hidden lg:block  w-full m-auto py-3 overflow-hidden">
+      <div className="hidden lg:block  w-full m-auto py-3 overflow-hidden ">
         <Container>
           <Flex className="justify-between items-center">
             <Link to={"/"}>

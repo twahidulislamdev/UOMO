@@ -20,7 +20,7 @@ const DefaultSorting = () => {
           {/* Dropdown Button */}
           <button
             onClick={toggleDropdown}
-            className="inline-flex justify-center items-center text-sm font-medium gap-x-3 px-5 py-3 mr-3 lg:mr-0  border-2  lg:border-0 border-mainColor rounded focus:outline-none focus:ring-offset-2  text-mainColor transition-colors duration-250"
+            className="inline-flex justify-center items-center text-base font-medium gap-x-3 px-5 py-3 mr-3 lg:mr-0  border-2  lg:border-0 border-mainColor rounded focus:outline-none focus:ring-offset-2  text-mainColor transition-colors duration-250"
           >
             FEATURED
             <IoChevronUp
