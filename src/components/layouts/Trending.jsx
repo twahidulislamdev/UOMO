@@ -1,7 +1,6 @@
 import React from "react";
 import Container from "../Container";
 import Flex from "../Flex";
-import HomeProduct from "../HomeProduct";
 
 import ProductOne from "../../assets/productOne.jpg";
 import ProductOneSide from "../../assets/productOneSide.jpg";
@@ -21,51 +20,18 @@ import ProductEight from "../../assets/productEight.jpg";
 import ProductEightSide from "../../assets/productEightSide.jpg";
 
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+
+import "swiper/css";
+import ProductCard from "../ProductCard";
 
 const Trending = () => {
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    autoplay: true,
-    autoplaySpeed: 2500,
-
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <div className="w-[96%] m-auto flex justify-center px-0 lg:px-0 mt-5 lg:mt-0 py-10 lg:py-16 overflow-hidden">
       <Container>
+        {/* Header */}
         <div className="text-center">
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
             Trending
@@ -84,10 +50,39 @@ const Trending = () => {
           </ul>
         </div>
 
-        <div className="mt-10">
-          <Slider className="pb-5" {...settings}>
-            <div>
-              <HomeProduct
+        {/* Slider + Arrows Section */}
+        <div className="mt-10 relative">
+          {/* NAVIGATION BUTTONS (ONLY LARGE DEVICE) */}
+          <div className="hidden lg:flex gap-3 absolute right-0 -top-12 z-10">
+            <button className="trending-prev w-9 h-9 flex items-center justify-center border border-black rounded-full hover:bg-black hover:text-white transition">
+              ‹
+            </button>
+            <button className="trending-next w-9 h-9 flex items-center justify-center border border-black rounded-full hover:bg-black hover:text-white transition">
+              ›
+            </button>
+          </div>
+
+          <Swiper
+            modules={[Autoplay, Navigation]}
+            spaceBetween={20}
+            slidesPerView={4}
+            autoplay={{ delay: 2500, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            navigation={{
+              nextEl: ".trending-next",
+              prevEl: ".trending-prev",
+            }}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 2 },
+              1280: { slidesPerView: 4 },
+            }}
+            className="pb-10"
+          >
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductOne}
                 imgAlt="Arive One"
                 imgSrcSide={ProductOneSide}
@@ -98,10 +93,10 @@ const Trending = () => {
                 badgeClassName="bg-white"
                 size="M"
               />
-            </div>
+            </SwiperSlide>
 
-            <div>
-              <HomeProduct
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductTwo}
                 imgAlt="Arive Two"
                 imgSrcSide={ProductTwoSide}
@@ -112,10 +107,10 @@ const Trending = () => {
                 badgeClassName="bg-green-300"
                 size="L"
               />
-            </div>
+            </SwiperSlide>
 
-            <div>
-              <HomeProduct
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductThree}
                 imgAlt="Arive Three"
                 imgSrcSide={ProductThreeSide}
@@ -126,10 +121,10 @@ const Trending = () => {
                 badgeClassName="bg-white"
                 size="S"
               />
-            </div>
+            </SwiperSlide>
 
-            <div>
-              <HomeProduct
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductFour}
                 imgAlt="Arive Four"
                 imgSrcSide={ProductFourSide}
@@ -140,10 +135,10 @@ const Trending = () => {
                 badgeClassName="bg-green-300"
                 size="XL"
               />
-            </div>
+            </SwiperSlide>
 
-            <div>
-              <HomeProduct
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductFive}
                 imgAlt="Arive Five"
                 imgSrcSide={ProductFiveSide}
@@ -154,10 +149,10 @@ const Trending = () => {
                 badgeClassName="bg-white"
                 size="M"
               />
-            </div>
+            </SwiperSlide>
 
-            <div>
-              <HomeProduct
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductSix}
                 imgAlt="Arive Six"
                 imgSrcSide={ProductSixSide}
@@ -168,10 +163,10 @@ const Trending = () => {
                 badgeClassName="bg-green-300"
                 size="L"
               />
-            </div>
+            </SwiperSlide>
 
-            <div>
-              <HomeProduct
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductSeven}
                 imgAlt="Arive Seven"
                 imgSrcSide={ProductSevenSide}
@@ -180,12 +175,12 @@ const Trending = () => {
                 price={17.0}
                 productColor="White"
                 badgeClassName="bg-white"
-                size="S"
+                size="L"
               />
-            </div>
+            </SwiperSlide>
 
-            <div>
-              <HomeProduct
+            <SwiperSlide>
+              <ProductCard
                 imgSrcFirst={ProductEight}
                 imgAlt="Arive Eight"
                 imgSrcSide={ProductEightSide}
@@ -194,12 +189,13 @@ const Trending = () => {
                 price={49.0}
                 productColor="Black"
                 badgeClassName="bg-green-300"
-                size="M"
+                size="L"
               />
-            </div>
-          </Slider>
+            </SwiperSlide>
+          </Swiper>
         </div>
 
+        {/* Button */}
         <div className="flex justify-center mt-6">
           <Link to="/shop">
             <button className="relative px-0 py-2 text-black text-sm md:text-base font-medium group cursor-pointer">

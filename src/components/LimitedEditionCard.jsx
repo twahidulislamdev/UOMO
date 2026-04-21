@@ -42,7 +42,7 @@ const LimitedEditionCard = ({
   };
 
   return (
-    <div className="mx-3 relative group overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
+    <div className="relative group overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
       {/* Image Container */}
       <div className="relative h-[300px] bg-gray-100 overflow-hidden">
         <div onClick={handleQuickView} className="cursor-pointer w-full h-full">
@@ -57,7 +57,7 @@ const LimitedEditionCard = ({
         </div>
 
         {/* Action Buttons - Positioned on image */}
-        <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+        <div className="absolute top-3 right-3 flex flex-col space-y-2 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
           <button
             onClick={handleQuickView}
             className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm hover:bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110"

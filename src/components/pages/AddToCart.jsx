@@ -12,8 +12,9 @@ const AddToCart = () => {
   const data = useSelector((state) => state.addtocart.value);
   const dispatch = useDispatch();
 
-  const [shippingCost, setShippingCost] = useState(0);
-  const vat = 5;
+  // ✅ Default shipping set to Local Pickup ($5)
+  const [shippingCost, setShippingCost] = useState(5);
+  const vat = 2;
 
   const isCartEmpty = data.length === 0;
 
@@ -55,7 +56,7 @@ const AddToCart = () => {
 
                     <div className="py-1">
                       <h4 className="text-lg text-mainColor pt-2">
-                        Blue color shirt
+                        {item.title}
                       </h4>
                       <h5 className="text-base text-[#767676] pt-2">
                         Color: {item.color}
@@ -118,15 +119,6 @@ const AddToCart = () => {
                       type="radio"
                       name="shipping"
                       defaultChecked
-                      onChange={() => setShippingCost(0)}
-                    />
-                    Free Shipping
-                  </label>
-
-                  <label className="flex gap-2">
-                    <input
-                      type="radio"
-                      name="shipping"
                       onChange={() => setShippingCost(5)}
                     />
                     Local Pickup: $5

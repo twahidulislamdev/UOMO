@@ -205,7 +205,7 @@ const Header = () => {
 
         {/* User Sidebar */}
         {isUserOpen && (
-          <div className="fixed top-0 right-0 w-[98%] lg:w-[500px] h-screen p-7 lg:p-10  bg-white shadow-lg z-50">
+          <div className="fixed top-0 right-0 w-[98%] lg:w-[515px] h-screen p-5 lg:p-10  bg-white shadow-lg z-50">
             <div className="flex justify-between items-center mb-5">
               <h4 className="text-lg font-medium">LOGIN</h4>
               <GrClose
@@ -311,7 +311,7 @@ const Header = () => {
 
         {/* Cart Sidebar */}
         {isCartOpen && (
-          <div className="fixed top-0 right-0 w-full lg:w-[500px] h-[100vh] px-2 lg:px-5 py-5 bg-white shadow-lg z-50 overflow-y-auto">
+          <div className="fixed top-0 right-0 w-full lg:w-[515px] h-[100vh] px-2 lg:px-5 py-3 bg-white shadow-lg z-50 overflow-y-auto">
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-xl font-medium">SHOPPING BAG</h4>
               <GrClose
@@ -334,7 +334,7 @@ const Header = () => {
                         imgAlt={item.title}
                       />
                       <div>
-                        <h4 className="w-[99%] pr-2 text-lg font-normal text-mainColor py-1 text-wrap">
+                        <h4 className="text-lg font-normal text-mainColor py-1 text-wrap">
                           {item.title}
                         </h4>
                         <h5 className="text-base text-[#767676] pt-1">

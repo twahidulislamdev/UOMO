@@ -7,7 +7,7 @@ import { setQuickViewItem } from "../features/quickViewSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const HomeProduct = ({
+const ProductCard = ({
   title,
   price,
   size,
@@ -25,7 +25,6 @@ const HomeProduct = ({
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    // Dispatch the item to the cart with size included
     dispatch(
       addToCart({
         title,
@@ -37,14 +36,15 @@ const HomeProduct = ({
       }),
     );
 
-    // Show toast confirmation
-    toast.success(`${title} (${size || "S"}) added to cart`, {
+      toast.success(`${title} (${size || "S"}) added`, {
       position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
+      autoClose: 1800,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
+      closeButton: true,
+      className: "pure-black-toast",
     });
   };
 
@@ -63,7 +63,7 @@ const HomeProduct = ({
 
   return (
     <div
-      className={`relative w-[330px] lg:w-[310px] h-130 group border-2 border-gray-200 m-auto lg:m-0 ${productClassName}`}
+      className={`relative w-[330px] lg:w-[310px] h-130 group border-2 border-gray-200 m-auto ${productClassName}`}
     >
       <Link to={"/quickview"} onClick={handleQuickView}>
         <div className="relative w-[330px] lg:w-[310px] h-100 overflow-hidden">
@@ -134,4 +134,4 @@ const HomeProduct = ({
   );
 };
 
-export default HomeProduct;
+export default ProductCard;

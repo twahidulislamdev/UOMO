@@ -5,54 +5,34 @@ import BlogOne from "../../assets/LatestBlogOne.jpg";
 import BlogTwo from "../../assets/LatestBlogTwo.png";
 import BlogThree from "../../assets/LatestBlogThree.png";
 import BlogFour from "../../assets/LatestBlogFour.png";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
 
 const LatestBlog = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 2,
-    initialSlide: 0,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    responsive: [
-      {
-        breakpoint: 1024, // tablets
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 768, // large phones
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 640, // small phones
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
   return (
-    <div className="py-[60px] bg-[#F3EDDF] px-3 lg:px-0 lg:block overflow-hidden">
+    <div className="py-[60px] bg-[#F3EDDF] px-3 lg:px-0 overflow-hidden">
       <Container>
         <h3 className="text-center text-4xl font-medium mb-10">
           Latest in Blog
         </h3>
-        <Slider {...settings}>
-          <div>
+
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={20}
+          slidesPerView={4}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+          }}
+        >
+          <SwiperSlide>
             <LatestBlogCard
               imgSrc={BlogOne}
               imgAlt="Blog One"
@@ -60,8 +40,9 @@ const LatestBlog = () => {
               dateTxt="APRIL 05, 2025"
               pTxt="Woman with good shoes is never be ugly place"
             />
-          </div>
-          <div>
+          </SwiperSlide>
+
+          <SwiperSlide>
             <LatestBlogCard
               imgSrc={BlogTwo}
               imgAlt="Blog Two"
@@ -69,8 +50,9 @@ const LatestBlog = () => {
               dateTxt="APRIL 05, 2025"
               pTxt="Woman with good shoes is never be ugly place"
             />
-          </div>
-          <div>
+          </SwiperSlide>
+
+          <SwiperSlide>
             <LatestBlogCard
               imgSrc={BlogThree}
               imgAlt="Blog Three"
@@ -78,8 +60,9 @@ const LatestBlog = () => {
               dateTxt="APRIL 05, 2025"
               pTxt="Woman with good shoes is never be ugly place"
             />
-          </div>
-          <div>
+          </SwiperSlide>
+
+          <SwiperSlide>
             <LatestBlogCard
               imgSrc={BlogFour}
               imgAlt="Blog Four"
@@ -87,8 +70,8 @@ const LatestBlog = () => {
               dateTxt="APRIL 05, 2025"
               pTxt="Woman with good shoes is never be ugly place"
             />
-          </div>
-        </Slider>
+          </SwiperSlide>
+        </Swiper>
       </Container>
     </div>
   );

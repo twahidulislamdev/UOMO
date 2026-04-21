@@ -12,12 +12,12 @@ import ProductSeven from "../../assets/productSeven.jpg";
 import ProductEight from "../../assets/productEight.jpg";
 import ProductFifteen from "../../assets/productFifteen.jpg";
 import DefaultSorting from "../layouts/DefaultSorting";
-import ShopProducts from "../ShopProducts";
 import { GrClose } from "react-icons/gr";
 import { IoFilter } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import Heading from "../Heading";
 import { ToastContainer } from "react-toastify";
+import ProductCard from "../ProductCard";
 
 const Shop = () => {
   const [isFilters, setIsFilters] = useState(false);
@@ -450,7 +450,7 @@ const Shop = () => {
               <div className="mt-8">
                 <Flex className="justify-between flex-wrap gap-y-10">
                   {products.map((product) => (
-                    <ShopProducts
+                    <ProductCard
                       key={product.id}
                       imgSrcFirst={product.imgSrcFirst}
                       imgAlt={product.imgAlt}
