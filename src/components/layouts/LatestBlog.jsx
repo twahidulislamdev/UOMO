@@ -23,6 +23,7 @@ const LatestBlog = () => {
           modules={[Autoplay]}
           spaceBetween={20}
           slidesPerView={4}
+          loop={true}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           breakpoints={{
             0: { slidesPerView: 1 },

@@ -39,6 +39,7 @@ const Testimonials = () => {
           <Swiper
             modules={[Autoplay, Navigation]}
             slidesPerView={1}
+            loop={true}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             speed={1000}
             navigation={{

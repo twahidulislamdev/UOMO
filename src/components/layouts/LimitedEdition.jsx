@@ -70,6 +70,7 @@ const LimitedEdition = () => {
           modules={[Autoplay, Navigation]}
           spaceBetween={20}
           slidesPerView={4}
+          loop={true}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           navigation={{
             nextEl: ".limited-next",

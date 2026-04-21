@@ -29,7 +29,7 @@ import ProductCard from "../ProductCard";
 
 const Trending = () => {
   return (
-    <div className="w-[96%] m-auto flex justify-center px-0 lg:px-0 mt-5 lg:mt-0 py-10 lg:py-16 overflow-hidden">
+    <div className="w-[96%] m-auto flex justify-center px-0 lg:px-0  lg:mt-0 py-10 lg:py-10 overflow-hidden">
       <Container>
         {/* Header */}
         <div className="text-center">
@@ -66,6 +66,7 @@ const Trending = () => {
             modules={[Autoplay, Navigation]}
             spaceBetween={20}
             slidesPerView={4}
+            loop={true}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             navigation={{

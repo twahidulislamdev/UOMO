@@ -65,6 +65,7 @@ const InsideCollection = () => {
             modules={[Autoplay, Navigation]}
             spaceBetween={20}
             slidesPerView={4}
+            loop={true}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             navigation={{
