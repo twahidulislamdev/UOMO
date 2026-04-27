@@ -10,6 +10,7 @@ import Pages from "./components/pages/Pages";
 import AddToCart from "./components/pages/AddToCart";
 import CheckOut from "./components/pages/CheckOut";
 import QuickView from "./components/pages/QuickView";
+import Login from "./components/pages/Login";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/addtocart" element={<AddToCart />} />
             <Route path="/checkout" element={<CheckOut />} />
           </Route>
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>

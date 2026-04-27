@@ -5,11 +5,10 @@ import Image from "../Image";
 import HeaderLogo from "../../assets/headerLogo.png";
 import CatagoryFive from "../../assets/catagoryFive.jpg";
 import {
-  FaRegUser,
   FaRegHeart,
+  FaRegUser,
   FaBars,
   FaTimes,
-  FaGoogle,
   FaHome,
   FaBlog,
   FaEnvelope,
@@ -30,7 +29,6 @@ import { decrement, increment, remove } from "../../features/addToCartSlice";
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [isUserOpen, setIsUserOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
@@ -62,12 +60,12 @@ const Header = () => {
     dispatch(remove(item));
   };
   useEffect(() => {
-    if (isCartOpen || isUserOpen || isCategoryOpen) {
+    if (isCartOpen || isCategoryOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [isCartOpen, isUserOpen, isCategoryOpen]);
+  }, [isCartOpen, isCategoryOpen]);
 
   return (
     <>
@@ -98,7 +96,7 @@ const Header = () => {
         <Container>
           <Flex className="justify-between items-center py-3 px-3">
             <Link to="/" className="flex items-center gap-2">
-              <Image imgSrc={HeaderLogo} imgAlt="Header Logo" />
+              <Image className="w-24 h-auto" imgSrc={HeaderLogo} imgAlt="Header Logo" />
             </Link>
 
             <button
@@ -190,220 +188,157 @@ const Header = () => {
 
             {/* Icons */}
             <div className="flex items-center gap-x-3 lg:gap-x-8">
-              <FaRegHeart className="text-xl cursor-pointer" />
-              <FaRegUser
-                onClick={() => setIsUserOpen(true)}
-                className="text-xl cursor-pointer"
-              />
-              <HiOutlineShoppingBag
+              <FaRegHeart className="text-xl cursor-pointer hover:text-gray-600 transition-colors" />
+              <Link to="/login">
+                <FaRegUser className="text-xl cursor-pointer hover:text-gray-600 transition-colors" />
+              </Link>
+              <div
+                className="relative cursor-pointer"
                 onClick={() => setIsCartOpen(true)}
-                className="text-2xl cursor-pointer"
-              />
+              >
+                <HiOutlineShoppingBag className="text-2xl hover:text-gray-600 transition-colors" />
+                {data.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-mainColor text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-medium">
+                    {data.reduce((total, item) => total + item.quantity, 0)}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </Container>
 
-        {/* User Sidebar */}
-        {isUserOpen && (
-          <div className="fixed top-0 right-0 w-[98%] lg:w-[515px] h-screen p-5 lg:p-10  bg-white shadow-lg z-50">
-            <div className="flex justify-between items-center mb-5">
-              <h4 className="text-lg font-medium">LOGIN</h4>
-              <GrClose
-                onClick={() => setIsUserOpen(false)}
-                className="text-xl cursor-pointer  lg:mr-0"
-              />
-            </div>
-            <div className="mt-10">
-              <form className="max-w-sm mx-auto">
-                {/* Email Start  */}
-                <div className="mb-5">
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-base font-medium text-black"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-400 text-gray-900 text-lg block w-full py-3 px-2 dark:placeholder-gray-400"
-                    placeholder="name@gmail.com"
-                    required=""
-                  />
-                </div>
-                {/* Email End  */}
-                {/* PassWord Start  */}
-                <div className="mb-5">
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-base font-medium text-black"
-                  >
-                    Your password
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    className="bg-gray-50 border border-gray-400 text-gray-900 text-lg block w-full py-3 px-2"
-                    placeholder="*******"
-                    required=""
-                  />
-                </div>
-                {/* Password End  */}
-                {/* Checkbox Start  */}
-                <div className="flex justify-between items-center ">
-                  <div className="flex justify-start items-center mb-5">
-                    <div className="flex  items-center h-5">
-                      <input
-                        id="remember"
-                        type="checkbox"
-                        defaultValue=""
-                        className="w-4 h-4 border border-gray-400 rounded-sm bg-gray-50 "
-                        required=""
-                      />
-                    </div>
-                    <label
-                      htmlFor="remember"
-                      className="ms-2 text-base font-medium text-mainColor dark:text-gray-700"
-                    >
-                      Remember me
-                    </label>
-                  </div>
-                  <div className="mb-5">
-                    <p className="text-base font-medium text-mainColor dark:text-gray-700 border-b-1 pb-0 border-gray-700 hover:cursor-pointer">
-                      Forget Password?
-                    </p>
-                  </div>
-                </div>
-                {/* Checkbox End  */}
-                {/* Submit Button Start  */}
-                <button
-                  type="submit"
-                  className="w-full bg-black text-white font-medium  text-lg  px-5 py-3 text-center hover:cursor-pointer"
-                >
-                  LOG IN
-                </button>
-                {/* Submit Button ENd  */}
-                {/* Creat Account Part Start  */}
-                <div className="mt-5 text-center">
-                  <p className="">
-                    No account yet?
-                    <span className="w-auto text-base font-medium text-mainColor dark:text-gray-700 border-b-1 pb-0 px-2 border-gray-700 hover:cursor-pointer">
-                      Creat Account
-                    </span>
-                  </p>
-                </div>
-                {/* Creat Account Part End  */}
-                <hr className="w-full m-auto items-center border-neutral-400 mt-5" />
-                {/* Login By Google Account start  */}
-                <div className="bg-black mt-5 w-full flex justify-center items-center gap-x-3 border-1 border-gray-400 px-5 py-3">
-                  <span>
-                    <FaGoogle className="text-white text-lg font-medium" />
-                  </span>
-                  <h6 className="text-white text-lg font-medium">
-                    Login With Google
-                  </h6>
-                </div>
-                {/* Login By Google Account End  */}
-              </form>
-            </div>
-          </div>
-        )}
-
         {/* Cart Sidebar */}
         {isCartOpen && (
-          <div className="fixed top-0 right-0 w-full lg:w-[515px] h-[100vh] px-2 lg:px-5 py-3 bg-white shadow-lg z-50 overflow-y-auto">
-            <div className="flex justify-between items-center mb-3">
-              <h4 className="text-xl font-medium">SHOPPING BAG</h4>
-              <GrClose
+          <div className="fixed top-0 right-0 w-full lg:w-[420px] h-[100vh] bg-white shadow-2xl z-50 flex flex-col">
+            {/* Cart Header */}
+            <div className="flex justify-between items-center p-5 border-b bg-gray-50">
+              <div className="flex items-center gap-3">
+                <HiOutlineShoppingBag className="text-2xl text-gray-700" />
+                <h4 className="text-xl font-semibold text-gray-800">
+                  Your Bag (
+                  {data.reduce((total, item) => total + item.quantity, 0)})
+                </h4>
+              </div>
+              <button
                 onClick={() => setIsCartOpen(false)}
-                className="text-xl font-bold cursor-pointer mr-3 lg:mr-0"
-              />
+                className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+              >
+                <GrClose className="text-xl" />
+              </button>
             </div>
-            {/* AddToCart Single Product start */}
-            <div className="overflow-y-auto max-h-[calc(100vh-250px)]">
-              {data.map((item) => (
-                <div
-                  className="bg-neutral-100 mb-3  rounded-md"
-                  key={item.title}
-                >
-                  <div className="flex justify-between">
-                    <div className="flex justify-center gap-x-5 lg:gap-x-7">
+
+            {/* Cart Items */}
+            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+              {data.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full text-center">
+                  <HiOutlineShoppingBag className="text-6xl text-gray-300 mb-4" />
+                  <p className="text-gray-500 text-lg mb-2">
+                    Your bag is empty
+                  </p>
+                  <p className="text-gray-400 text-sm">
+                    Add items to get started
+                  </p>
+                  <button
+                    onClick={() => setIsCartOpen(false)}
+                    className="mt-6 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                  >
+                    Continue Shopping
+                  </button>
+                </div>
+              ) : (
+                data.map((item) => (
+                  <div
+                    className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100"
+                    key={item.title}
+                  >
+                    {/* Product Image */}
+                    <div className="w-24 h-24 flex-shrink-0 bg-white rounded-lg overflow-hidden border border-gray-200">
                       <Image
-                        className={"w-[170px] h-auto"}
+                        className={"w-full h-full object-cover"}
                         imgSrc={item.img}
                         imgAlt={item.title}
                       />
-                      <div>
-                        <h4 className="text-lg font-normal text-mainColor py-1 text-wrap">
+                    </div>
+
+                    {/* Product Details */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex justify-between items-start">
+                        <h4 className="text-base font-semibold text-gray-800 truncate pr-2">
                           {item.title}
                         </h4>
-                        <h5 className="text-base text-[#767676] pt-1">
-                          Color: {item.color}
-                        </h5>
-                        <h6 className="text-base text-[#767676] pt-1.5">
-                          Size: {item.size}
-                        </h6>
-                        <h6 className="text-base text-[#767676] pt-1">
-                          Unit Price: ${item.price.toFixed(2)}
-                        </h6>
-                        <h6 className="text-base font-medium pt-2">
-                          Total: ${(item.price * item.quantity).toFixed(2)}
-                        </h6>
-                        {/* Increment Decrement start */}
-                        <div className="flex justify-start items-center gap-x-5 mt-2">
-                          <span className="text-xl text-[#767676]">
-                            <HiMinusSmall
-                              onClick={() => handleDecerment(item)}
-                            />
-                          </span>
-                          <p className="text-xl text-[#767676]">
+                        <button
+                          onClick={() => handleRemove(item)}
+                          className="p-1 hover:bg-gray-200 rounded-full transition-colors text-gray-400 hover:text-red-500"
+                        >
+                          <GrClose className="text-sm" />
+                        </button>
+                      </div>
+
+                      <p className="text-sm text-gray-500 mt-1">
+                        {item.color} / {item.size}
+                      </p>
+
+                      <div className="flex justify-between items-center mt-3">
+                        {/* Quantity Controls */}
+                        <div className="flex items-center bg-white rounded-lg border border-gray-200">
+                          <button
+                            onClick={() => handleDecerment(item)}
+                            className="p-2 hover:bg-gray-100 transition-colors rounded-l-lg"
+                          >
+                            <HiMinusSmall className="text-gray-600" />
+                          </button>
+                          <span className="px-3 text-sm font-medium text-gray-700">
                             {item.quantity}
-                          </p>
-                          <span className="text-xl text-[#767676]">
-                            <HiPlusSmall
-                              onClick={() => handleIncerment(item)}
-                            />
                           </span>
+                          <button
+                            onClick={() => handleIncerment(item)}
+                            className="p-2 hover:bg-gray-100 transition-colors rounded-r-lg"
+                          >
+                            <HiPlusSmall className="text-gray-600" />
+                          </button>
                         </div>
-                        {/* Increment Decrement End */}
+
+                        {/* Price */}
+                        <p className="text-base font-semibold text-gray-800">
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </p>
                       </div>
                     </div>
-                    {/* Price And Cross part start */}
-                    <div className="relative">
-                      <p className="absolute top-0 right-2 text-sm pt-3 px-2 cursor-pointer">
-                        <GrClose onClick={() => handleRemove(item)} />
-                      </p>
-                    </div>
-                    {/* Price And Cross part End */}
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
-            {/* AddToCart Single Product End */}
-            {/* Sub Total/ view cart section Start */}
-            <div className="border-t-2 border-gray-300 pt-3">
-              <div className="flex justify-between items-center">
-                <h5 className="text-2xl font-semibold">SUBTOTAL:</h5>
-                <p className="text-2xl font-semibold">${calculateSubtotal()}</p>
+
+            {/* Cart Footer */}
+            {data.length > 0 && (
+              <div className="p-5 border-t bg-gray-50 space-y-4">
+                {/* Subtotal */}
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Subtotal</span>
+                  <span className="text-2xl font-bold text-gray-800">
+                    ${calculateSubtotal()}
+                  </span>
+                </div>
+
+                <p className="text-xs text-gray-500 text-center">
+                  Shipping and taxes calculated at checkout
+                </p>
+
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  <Link to={"/addtocart"} onClick={() => setIsCartOpen(false)}>
+                    <button className="w-full py-4 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-all hover:shadow-lg">
+                      VIEW CART
+                    </button>
+                  </Link>
+                  <Link to={"/checkout"} onClick={() => setIsCartOpen(false)}>
+                    <button className="w-full py-4 bg-mainColor text-white font-semibold rounded-xl hover:opacity-90 transition-all hover:shadow-lg">
+                      CHECKOUT
+                    </button>
+                  </Link>
+                </div>
               </div>
-              <Link to={"/addtocart"}>
-                <div
-                  onClick={() => setIsCartOpen(false)}
-                  className="text-center text-lg font-medium mt-5 py-5 lg:py-3 w-full bg-[#E4E4E4] hover:cursor-pointer"
-                >
-                  VIEW CART
-                </div>
-              </Link>
-              <Link to={"/checkout"}>
-                <div
-                  onClick={() => setIsCartOpen(false)}
-                  className="text-center text-lg text-white font-medium mt-5 py-5 lg:py-3 w-full bg-mainColor hover:cursor-pointer"
-                >
-                  CHECKOUT
-                </div>
-              </Link>
-            </div>
-            {/* Sub Total/ view cart section End */}
+            )}
           </div>
         )}
 
