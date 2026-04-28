@@ -198,7 +198,10 @@ const Header = () => {
               </Link>
               <div
                 className="relative cursor-pointer"
-                onClick={() => setIsCartOpen(true)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsCartOpen(true);
+                }}
               >
                 <HiOutlineShoppingBag className="text-2xl hover:text-gray-600 transition-colors" />
                 {data.length > 0 && (

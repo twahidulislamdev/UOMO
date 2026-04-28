@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../Container";
 import Flex from "../Flex";
 import QuickOneFirst from "../../assets/quickOneFirst.jpg";
@@ -29,9 +29,14 @@ const QuickView = () => {
   const dispatch = useDispatch();
   const quickViewData = useSelector((state) => state.quickView.item);
 
-  const [mainImage, setMainImage] = useState(
-    quickViewData?.img || QuickOneFirst,
-  );
+  const [mainImage, setMainImage] = useState(QuickOneFirst);
+
+  // ✅ Update mainImage when quickViewData changes
+  useEffect(() => {
+    if (quickViewData?.img) {
+      setMainImage(quickViewData.img);
+    }
+  }, [quickViewData]);
 
   const handleThumbnailClick = (image) => {
     setMainImage(image);
