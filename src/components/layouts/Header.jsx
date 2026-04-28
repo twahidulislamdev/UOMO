@@ -92,11 +92,15 @@ const Header = () => {
       {/* Desktop Header End */}
 
       {/* Mobile Header start */}
-      <div className="w-full lg:hidden bg-white shadow-sm relative z-50">
+      <div className="w-full lg:hidden bg-white shadow-sm relative z-50 py-2 px-3">
         <Container>
-          <Flex className="justify-between items-center py-3 px-3">
+          <Flex className="justify-between items-center ">
             <Link to="/" className="flex items-center gap-2">
-              <Image className="w-24 h-auto" imgSrc={HeaderLogo} imgAlt="Header Logo" />
+              <Image
+                className="w-24 h-auto"
+                imgSrc={HeaderLogo}
+                imgAlt="Header Logo"
+              />
             </Link>
 
             <button
@@ -169,7 +173,7 @@ const Header = () => {
       {/* Mobile Header End */}
 
       {/* Header Lower Part Start */}
-      <div className="w-full flex justify-center m-auto px-3 py-4 bg-[#F5F5F3] shadow-sm overflow-hidden">
+      <div className="w-full flex justify-center m-auto px-5 py-3 bg-[#F5F5F3] shadow-sm overflow-hidden">
         <Container>
           <div className="flex justify-between items-center">
             {/* Category Icon */}
@@ -209,9 +213,9 @@ const Header = () => {
 
         {/* Cart Sidebar */}
         {isCartOpen && (
-          <div className="fixed top-0 right-0 w-full lg:w-[420px] h-[100vh] bg-white shadow-2xl z-50 flex flex-col">
+          <div className="fixed top-0 right-0 w-full lg:w-[420px] h-[100vh] bg-white shadow-2xl z-50 flex flex-col overflow-y-auto lg:overflow-hidden pb-15 lg:pb-0 ">
             {/* Cart Header */}
-            <div className="flex justify-between items-center p-5 border-b bg-gray-50">
+            <div className="flex justify-between items-center px-5 py-2 border-b bg-gray-50">
               <div className="flex items-center gap-3">
                 <HiOutlineShoppingBag className="text-2xl text-gray-700" />
                 <h4 className="text-xl font-semibold text-gray-800">
@@ -221,17 +225,17 @@ const Header = () => {
               </div>
               <button
                 onClick={() => setIsCartOpen(false)}
-                className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+                className="p-2 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
               >
                 <GrClose className="text-xl" />
               </button>
             </div>
 
             {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            <div className="flex-1 overflow-y-auto px-3 space-y-2">
               {data.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
-                  <HiOutlineShoppingBag className="text-6xl text-gray-300 mb-4" />
+                  <HiOutlineShoppingBag className="text-6xl text-gray-300 " />
                   <p className="text-gray-500 text-lg mb-2">
                     Your bag is empty
                   </p>
@@ -248,11 +252,11 @@ const Header = () => {
               ) : (
                 data.map((item) => (
                   <div
-                    className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100"
+                    className="flex gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100"
                     key={item.title}
                   >
                     {/* Product Image */}
-                    <div className="w-24 h-24 flex-shrink-0 bg-white rounded-lg overflow-hidden border border-gray-200">
+                    <div className="w-28 h-[130px] flex-shrink-0 bg-white rounded-lg overflow-hidden border border-gray-200">
                       <Image
                         className={"w-full h-full object-cover"}
                         imgSrc={item.img}
@@ -268,7 +272,7 @@ const Header = () => {
                         </h4>
                         <button
                           onClick={() => handleRemove(item)}
-                          className="p-1 hover:bg-gray-200 rounded-full transition-colors text-gray-400 hover:text-red-500"
+                          className="p-1 hover:bg-gray-200 rounded-full transition-colors text-gray-400 hover:text-red-500 cursor-pointer"
                         >
                           <GrClose className="text-sm" />
                         </button>
@@ -283,7 +287,7 @@ const Header = () => {
                         <div className="flex items-center bg-white rounded-lg border border-gray-200">
                           <button
                             onClick={() => handleDecerment(item)}
-                            className="p-2 hover:bg-gray-100 transition-colors rounded-l-lg"
+                            className="p-2 hover:bg-gray-100 transition-colors rounded-l-lg cursor-pointer"
                           >
                             <HiMinusSmall className="text-gray-600" />
                           </button>
@@ -292,7 +296,7 @@ const Header = () => {
                           </span>
                           <button
                             onClick={() => handleIncerment(item)}
-                            className="p-2 hover:bg-gray-100 transition-colors rounded-r-lg"
+                            className="p-2 hover:bg-gray-100 transition-colors rounded-r-lg cursor-pointer"
                           >
                             <HiPlusSmall className="text-gray-600" />
                           </button>
@@ -311,28 +315,26 @@ const Header = () => {
 
             {/* Cart Footer */}
             {data.length > 0 && (
-              <div className="p-5 border-t bg-gray-50 space-y-4">
+              <div className="p-5 border-t bg-gray-50 space-y-5">
                 {/* Subtotal */}
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Subtotal</span>
+                <div className="flex justify-between items-center px-3">
+                  <span className="text-2xl font-bold text-gray-800">
+                    Subtotal
+                  </span>
                   <span className="text-2xl font-bold text-gray-800">
                     ${calculateSubtotal()}
                   </span>
                 </div>
 
-                <p className="text-xs text-gray-500 text-center">
-                  Shipping and taxes calculated at checkout
-                </p>
-
                 {/* Action Buttons */}
-                <div className="space-y-3">
+                <div className="gap-3 flex flex-col">
                   <Link to={"/addtocart"} onClick={() => setIsCartOpen(false)}>
-                    <button className="w-full py-4 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-all hover:shadow-lg">
+                    <button className="w-full py-4.5 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-all hover:shadow-lg">
                       VIEW CART
                     </button>
                   </Link>
                   <Link to={"/checkout"} onClick={() => setIsCartOpen(false)}>
-                    <button className="w-full py-4 bg-mainColor text-white font-semibold rounded-xl hover:opacity-90 transition-all hover:shadow-lg">
+                    <button className="w-full py-4.5 bg-mainColor text-white font-semibold rounded-xl hover:opacity-90 transition-all hover:shadow-lg">
                       CHECKOUT
                     </button>
                   </Link>
