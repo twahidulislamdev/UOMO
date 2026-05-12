@@ -17,8 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decrementQuickViewItem,
   incrementQuickViewItem,
-} from "../../features/quickViewSlice";
-import { addToCart } from "../../features/addToCartSlice";
+} from "../../features/products/quickViewSlice";
+import { addToCart } from "../../features/products/addToCartSlice";
 
 const QuickView = () => {
   const [selectedSize, setSelectedSize] = useState(null);
@@ -31,7 +31,7 @@ const QuickView = () => {
 
   const [mainImage, setMainImage] = useState(QuickOneFirst);
 
-  // ✅ Update mainImage when quickViewData changes
+  // Update mainImage when quickViewData changes
   useEffect(() => {
     if (quickViewData?.img) {
       setMainImage(quickViewData.img);
@@ -95,24 +95,9 @@ const QuickView = () => {
         </div>
       )}
 
-      <div className="my-8 p-4">
+      <div className="my-2 p-3">
         <Container>
-          {/* Breadcrumb */}
-          <div className="mb-6">
-            <p className="text-sm font-medium text-gray-500 flex items-center gap-2">
-              <span className="hover:text-mainColor cursor-pointer transition-colors">
-                Home
-              </span>
-              <span>/</span>
-              <span className="hover:text-mainColor cursor-pointer transition-colors">
-                Shop
-              </span>
-              <span>/</span>
-              <span className="text-mainColor">Product</span>
-            </p>
-          </div>
-
-          <Flex className="justify-between flex-wrap gap-8">
+          <Flex className="justify-between flex-wrap gap-5">
             {/* Left Part - Image Gallery */}
             <div className="w-full lg:w-[55%] flex flex-col-reverse lg:flex-row gap-4">
               {/* Thumbnails */}

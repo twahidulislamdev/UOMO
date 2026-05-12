@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { HiOutlineHeart } from "react-icons/hi2";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../features/addToCartSlice";
-import { setQuickViewItem } from "../features/quickViewSlice";
+import { addToCart } from "../features/products/addToCartSlice";
+import { setQuickViewItem } from "../features/products/quickViewSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

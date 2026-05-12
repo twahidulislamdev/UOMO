@@ -24,7 +24,7 @@ import {
 import { Link } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, remove } from "../../features/addToCartSlice";
+import { decrement, increment, remove } from "../../features/products/addToCartSlice";
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);

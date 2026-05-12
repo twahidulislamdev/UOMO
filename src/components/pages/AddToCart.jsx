@@ -5,7 +5,7 @@ import Container from "../Container";
 import { GrClose } from "react-icons/gr";
 import { HiPlusSmall, HiMinusSmall } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, remove } from "../../features/addToCartSlice";
+import { decrement, increment, remove } from "../../features/products/addToCartSlice";
 import { Link } from "react-router-dom";
 
 const AddToCart = () => {

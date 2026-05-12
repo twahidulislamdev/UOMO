@@ -5,8 +5,8 @@ import {
   HiOutlineHeart,
 } from "react-icons/hi2";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../features/addToCartSlice";
-import { setQuickViewItem } from "../features/quickViewSlice";
+import { addToCart } from "../features/products/addToCartSlice";
+import { setQuickViewItem } from "../features/products/quickViewSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,11 +23,12 @@ const LimitedEditionCard = ({
 
   // ✅ consistent default size
   const defaultSize = size || "S";
-  
+
   // ✅ Parse price to number to avoid NaN
-  const numericPrice = typeof price === 'string' 
-    ? parseFloat(price.replace(/[^0-9.]/g, '')) 
-    : price;
+  const numericPrice =
+    typeof price === "string"
+      ? parseFloat(price.replace(/[^0-9.]/g, ""))
+      : price;
 
   const handleAddToCart = (e) => {
     e.preventDefault(); // ✅ prevent Link navigation
