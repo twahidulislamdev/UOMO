@@ -22,7 +22,7 @@ const Registration = () => {
           {/* Card Wrapper */}
           <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl">
             {/* ── LEFT PANEL ── */}
-            <div className="relative bg-[#0d0d0d] flex-col justify-between px-10 py-0 lg:py-5 my-0 lg:my-5 overflow-hidden hidden lg:flex rounded-2xl border border-gray-100">
+            <div className="relative bg-[#0d0d0d] flex-col justify-between px-10 py-0 lg:py-3 my-0 lg:my-5 overflow-hidden hidden lg:flex rounded-2xl border border-gray-100">
               {/* Decorative circles */}
               <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white opacity-[0.04]" />
               <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-white opacity-[0.03]" />
@@ -71,18 +71,15 @@ const Registration = () => {
             </div>
 
             {/* ── RIGHT PANEL ── */}
-            <div className="bg-white flex flex-col justify-center px-10 py-0 lg:py-5 my-0 lg:my-5 rounded-2xl border border-gray-300 overflow-hidden">
+            <div className="bg-white flex flex-col justify-center px-10 py-0 lg:py-3 my-0 lg:my-5 rounded-2xl border border-gray-300 overflow-hidden">
               {/* Header */}
-              <div className="mb-8">
+              <div className="mb-3">
                 <h2
                   className="text-[26px] font-medium text-[#0d0d0d] mb-1.5"
                   style={{ fontFamily: "'Georgia', serif" }}
                 >
                   Create an account
                 </h2>
-                <p className="text-sm text-gray-400 font-light">
-                  Sign up to get started with your workspace
-                </p>
               </div>
 
               <form
@@ -132,7 +129,7 @@ const Registration = () => {
                       type="email"
                       placeholder="you@company.com"
                       required
-                      className="w-full h-11 pl-10 pr-3 text-sm text-[#0d0d0d] bg-gray-50 border border-gray-300 rounded-lg outline-none transition-all duration-200 focus:border-[#0d0d0d] focus:bg-white focus:ring-2 focus:ring-black/5 placeholder:text-gray-300"
+                      className="w-full h-10 pl-10 pr-3 text-sm text-[#0d0d0d] bg-gray-50 border border-gray-300 rounded-lg outline-none transition-all duration-200 focus:border-[#0d0d0d] focus:bg-white focus:ring-2 focus:ring-black/5 placeholder:text-gray-300"
                     />
                   </div>
                 </div>
@@ -148,7 +145,7 @@ const Registration = () => {
                       type={showPass ? "text" : "password"}
                       placeholder="••••••••"
                       required
-                      className="w-full h-11 pl-10 pr-10 text-sm text-[#0d0d0d] bg-gray-50 border border-gray-300 rounded-lg outline-none transition-all duration-200 focus:border-[#0d0d0d] focus:bg-white focus:ring-2 focus:ring-black/5 placeholder:text-gray-300"
+                      className="w-full h-10 pl-10 pr-10 text-sm text-[#0d0d0d] bg-gray-50 border border-gray-300 rounded-lg outline-none transition-all duration-200 focus:border-[#0d0d0d] focus:bg-white focus:ring-2 focus:ring-black/5 placeholder:text-gray-300"
                     />
                     <button
                       type="button"
@@ -171,7 +168,7 @@ const Registration = () => {
                       type={showConfirmPass ? "text" : "password"}
                       placeholder="••••••••"
                       required
-                      className="w-full h-11 pl-10 pr-10 text-sm text-[#0d0d0d] bg-gray-50 border border-gray-300 rounded-lg outline-none transition-all duration-200 focus:border-[#0d0d0d] focus:bg-white focus:ring-2 focus:ring-black/5 placeholder:text-gray-300"
+                      className="w-full h-10 pl-10 pr-10 text-sm text-[#0d0d0d] bg-gray-50 border border-gray-300 rounded-lg outline-none transition-all duration-200 focus:border-[#0d0d0d] focus:bg-white focus:ring-2 focus:ring-black/5 placeholder:text-gray-300"
                     />
                     <button
                       type="button"
@@ -216,7 +213,7 @@ const Registration = () => {
                 {/* Sign Up Button */}
                 <button
                   type="submit"
-                  className="w-full h-12 bg-[#0d0d0d] text-white text-xs font-medium uppercase tracking-[2px] rounded-lg hover:bg-[#2a2a2a] active:scale-[0.99] transition-all duration-200 cursor-pointer"
+                  className="w-full h-10 bg-[#0d0d0d] text-white text-xs font-medium uppercase tracking-[2px] rounded-lg hover:bg-[#2a2a2a] active:scale-[0.99] transition-all duration-200 cursor-pointer"
                 >
                   Create account
                 </button>
@@ -234,14 +231,14 @@ const Registration = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
-                    className="h-11 flex items-center justify-center gap-2 bg-gray-50 border border-gray-500 rounded-lg text-base text-[#0d0d0d] hover:bg-gray-100 hover:border-gray-300 active:scale-[0.99] transition-all duration-200 cursor-pointer"
+                    className="h-10 flex items-center justify-center gap-2 bg-gray-50 border border-gray-500 rounded-lg text-base text-[#0d0d0d] hover:bg-gray-100 hover:border-gray-300 active:scale-[0.99] transition-all duration-200 cursor-pointer"
                   >
                     <FcGoogle className="text-2xl text-[#EA4335]  shrink-0" />
                     Google
                   </button>
                   <button
                     type="button"
-                    className="h-11 flex items-center justify-center gap-2 bg-gray-50 border border-gray-500 rounded-lg text-base text-[#0d0d0d] hover:bg-gray-100 hover:border-gray-300 active:scale-[0.99] transition-all duration-200 cursor-pointer"
+                    className="h-10 flex items-center justify-center gap-2 bg-gray-50 border border-gray-500 rounded-lg text-base text-[#0d0d0d] hover:bg-gray-100 hover:border-gray-300 active:scale-[0.99] transition-all duration-200 cursor-pointer"
                   >
                     <FaGithub className="text-[#0d0d0d] text-2xl shrink-0" />
                     GitHub
